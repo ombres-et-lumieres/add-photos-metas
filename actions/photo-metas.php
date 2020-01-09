@@ -184,7 +184,6 @@ if(isset($iptc["2#092"][0]))
 									 "City" => $city,
 									 "Location" => $location,
 									 "Creation_Date" => $creation_date,
-									 "Modification_Date" => $modification_date,
 									 "photografic_style" => $photografic_style,
 									 "sous-emplacement" => $sous_emplacement
 								);
