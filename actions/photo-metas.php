@@ -190,31 +190,37 @@ if(isset($iptc["2#092"][0]))
 								);
 
 
+if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
+
+{
+
+	if(get_field('auteur')):  update_field( 'auteur',$author , $id ); endif;
+	
+	if(get_field('copyright')):  update_field( 'copyright',$copyright , $id ); endif;
+	
+	if(get_field('titre')):  update_field( 'titre',$titre , $id ); endif;
+	
+	if(get_field('description')):  update_field( 'description',$description , $id ); endif;
+	
+	if(get_field('pays')):  update_field( 'pays' ,$country , $id ); endif;
+	
+	if(get_field('region')):  update_field( 'region',$state , $id ); endif;
+	
+	if(get_field('ville')):  update_field( 'ville',$city , $id ); endif;
+	
+	if(get_field('lieu')):  update_field( 'lieu',$location , $id ); endif;
+	
+	if(get_field('sous_emplacement')):  update_field( 'sous_emplacement',$sous_emplacement , $id ); endif;
+	
+	if(get_field('date_de_creation')):  update_field( 'date_de_creation',$creation_date , $id ); endif;
+	
+	if(get_field('style_photographique')):  update_field( 'style_photographique',$photografic_style , $id ); endif;
+
+}
 
 
 
 
-	update_field( 'auteur',$author , $id );
-	
-	update_field( 'copyright',$copyright , $id );
-	
-	update_field( 'titre',$titre , $id );
-	
-	update_field( 'description',$description , $id );
-	
-	update_field( 'pays' ,$country , $id );
-	
-	update_field( 'region',$state , $id );
-	
-	update_field( 'ville',$city , $id );
-	
-	update_field( 'lieu',$location , $id );
-	
-	update_field( 'sous_emplacement',$sous_emplacement , $id );
-	
-	update_field( 'date_de_creation',$creation_date , $id );
-	
-	update_field( 'style_photographique',$photografic_style , $id );
 
 
 
