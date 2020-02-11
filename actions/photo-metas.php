@@ -6,7 +6,7 @@ function ol_modify_attachment_datas($data, $id)
 		/* je fais une recherche des exifs et iptc au cas où je n' aurais rien récupéré via le plugin */
 		/* la fonction php exif_read_data nécessite un chemin absolu */
 
-	$scr =  wp_get_attachment_image_src( $id);
+	$scr =  wp_get_attachment_image_src($id, "full");
 
 	$upload = wp_upload_dir();
 
@@ -24,161 +24,125 @@ function ol_modify_attachment_datas($data, $id)
 
 	$newdata = $data;
 
+	$attchment_metas =  wp_get_attachment_metadata( $id );
 
 
-if(isset($img_exif["IFD0"]["Artist"]))
-	{
-		$author = $img_exif["IFD0"]["Artist"];
-	}
-	elseif(isset($iptc))
+
+	if(isset($img_exif["IFD0"]["Artist"]))
 		{
-			$author = $iptc["2#122"][0];
+			$author = $img_exif["IFD0"]["Artist"];
+		}
+		elseif(isset($iptc))
+			{
+				$author = $iptc["2#122"][0];
+			}
+			else 
+				{
+				$author = $attchment_metas["image_meta"]["credit"];
+				}
+
+	
+
+	
+	
+	
+	
+
+
+	
+	if(isset($img_exif["IFD0"]["Copyright"]))
+		{
+			$copyright = $img_exif["IFD0"]["Copyright"];
+		}
+		elseif(isset($iptc))
+			{
+				$copyright = $iptc["2#116"][0];
+			}
+			else 
+				{
+					$copyright = $attchment_metas["image_meta"]["copyright"];
+				}
+
+
+	
+	if(isset($iptc["2#101"][0]))
+		{
+			$country = $iptc["2#101"][0];
 		}
 		else 
-			{
-			$author = "";
-			}
-
-
-
-
-
-
-if(isset($img_exif["IFD0"]["Copyright"]))
-	{
-		$copyright = $img_exif["IFD0"]["Copyright"];
-	}
-	elseif(isset($iptc))
-		{
-			$copyright = $iptc["2#116"][0];
-		}
-		else 
-			{
-				$copyright = "";
-			}
-
-
-
-
-
-/*
-if(isset($iptc["2#005"][0]))
-	{
-		$titre = $iptc["2#005"][0];
-	}
-	else 
-		{
-			$titre = "";
-		}
-*/
-
-$titre = $iptc["2#005"][0];
-
-
-if(isset($img_exif["IFD0"]["ImageDescription"]))
-	{
-		$description = $img_exif["IFD0"]["ImageDescription"];
-	}
-	elseif(isset($iptc))
-		{
-			$description = $iptc["2#120"][0];
-		}
-		else 
-			{
-				$description = "";
-			}
-
-
-
-
-if(isset($iptc["2#101"][0]))
-	{
-		$country = $iptc["2#101"][0];
-	}
-	else 
 		{
 			$country = "";
-		} 
-
-
-
-
-if(isset($iptc["2#095"][0]))
-	{
-		$state = $iptc["2#095"][0];
-	}
-	else 
-		{
-			$state = "";
 		}
-
-
-if(isset($iptc["2#090"][0]))
-	{
-		$city = $iptc["2#090"][0];
-	}
-	else 
+	
+	if(isset($iptc["2#095"][0]))
 		{
-			$city = "";
-		} 
-
-
-
-
-if(isset($iptc["2#026"][0]))
-	{
-		$location = $iptc["2#026"][0];
-	}
-	else 
-		{
-			$location = "";
-		}
-
-
-if(isset($img_exif["EXIF"]["DateTimeOriginal"]))
-	{
-		$creation_date = $img_exif["EXIF"]["DateTimeOriginal"];
-	}
-	elseif(isset($iptc))
-		{
-			$creation_date = $iptc["2#055"][0];
+			$state = $iptc["2#095"][0];
 		}
 		else 
-			{
-				$creation_date = "";
-			} 
-
-
-
-if(isset($iptc["2#015"][0]))
-	{
-		$photografic_style = $iptc["2#015"][0];
-	}
-	else 
+		{
+			$state = "";
+		}	
+	
+	if(isset($iptc["2#090"][0]))
+		{
+			$city = $iptc["2#090"][0];
+		}
+		else 
+		{
+			$city = "";
+		}
+		
+	if(isset($iptc["2#026"][0]))
+		{
+			$location = $iptc["2#026"][0];
+		}
+		else 
+		{
+			$location = "";
+		}		
+		
+		
+	if(isset($iptc["2#015"][0]))
+		{
+			$photografic_style = $iptc["2#015"][0];
+		}
+		else 
 		{
 			$photografic_style = "";
-		} 
-
-
-
-
-
-if(isset($iptc["2#092"][0]))
-	{
-		$sous_emplacement = $iptc["2#092"][0];
-	}
-	else 
+		}			
+	
+	
+	if(isset($iptc["2#092"][0]))
+		{
+			$sous_emplacement = $iptc["2#092"][0];
+		}
+		else 
 		{
 			$sous_emplacement = "";
+		}		
+	
+		
+	if(isset($img_exif["EXIF"]["DateTimeOriginal"]))
+		{
+			$creation_date = $img_exif["EXIF"]["DateTimeOriginal"];
 		}
+		elseif(isset($iptc))
+			{
+				$creation_date = $iptc["2#055"][0];
+			}
+			else 
+				{
+					$creation_date = "";
+				} 
+
 
 
 
 	$newdata["oetl" ] =  array  (
 									"Author" => $author,
 									 "Copyright" =>$copyright,
-									 "title" => $titre,
-									 "Description" => $description,
+									// "title" => $titre,
+									// "Description" => $description,
 									 "Country" => $country,
 									 "State" => $state,
 									 "City" => $city,
@@ -189,17 +153,22 @@ if(isset($iptc["2#092"][0]))
 								);
 
 
+
+
+/*
 if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
 
 {
+*/
 
+/*
 	if(get_field('auteur')):  update_field( 'auteur',$author , $id ); endif;
 	
 	if(get_field('copyright')):  update_field( 'copyright',$copyright , $id ); endif;
 	
-	if(get_field('titre')):  update_field( 'titre',$titre , $id ); endif;
+//	if(get_field('titre')):  update_field( 'titre',$titre , $id ); endif;
 	
-	if(get_field('description')):  update_field( 'description',$description , $id ); endif;
+//	if(get_field('description')):  update_field( 'description',$description , $id ); endif;
 	
 	if(get_field('pays')):  update_field( 'pays' ,$country , $id ); endif;
 	
@@ -214,8 +183,21 @@ if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
 	if(get_field('date_de_creation')):  update_field( 'date_de_creation',$creation_date , $id ); endif;
 	
 	if(get_field('style_photographique')):  update_field( 'style_photographique',$photografic_style , $id ); endif;
+*/
 
-}
+// }
+
+
+
+update_field( 'auteur',$author , $id );
+update_field( 'copyright',$copyright , $id );
+update_field( 'pays' ,$country , $id );
+update_field( 'region',$state , $id );
+update_field( 'ville',$city , $id );
+update_field( 'lieu',$location , $id );
+update_field( 'sous_emplacement',$sous_emplacement , $id );
+update_field( 'date_de_creation',$creation_date , $id );
+update_field( 'style_photographique',$photografic_style , $id );
 
 
 

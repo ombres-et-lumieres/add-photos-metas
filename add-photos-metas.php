@@ -43,9 +43,10 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 
 include( "actions/photo-metas.php");
-
-
-
+include( "actions/shortcodes.php");
+include( "customize/add-photos-sizes.php");
+include( "customize/customizer-functions.php");
+include( "customize/new-pannel.php");
 
 
 
