@@ -44,12 +44,6 @@ function ol_modify_attachment_datas($data, $id)
 	
 
 	
-	
-	
-	
-
-
-	
 	if(isset($img_exif["IFD0"]["Copyright"]))
 		{
 			$copyright = $img_exif["IFD0"]["Copyright"];
@@ -189,6 +183,7 @@ if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
 
 
 
+/*
 update_field( 'auteur',$author , $id );
 update_field( 'copyright',$copyright , $id );
 update_field( 'pays' ,$country , $id );
@@ -198,11 +193,24 @@ update_field( 'lieu',$location , $id );
 update_field( 'sous_emplacement',$sous_emplacement , $id );
 update_field( 'date_de_creation',$creation_date , $id );
 update_field( 'style_photographique',$photografic_style , $id );
+*/
 
 
 
+/*
+get_theme_mod( "acf_number_setting", "0" );
 
+get_theme_mod("acf_name_setting" . $i, "" );
+*/
 
+	$i = 1;
+
+	foreach($newdata["oetl" ] as $value)
+	{	
+		update_field(get_theme_mod("acf_name_setting" . $i, "" ), $value, $id);
+		
+		$i++;
+	}
 
 
 /* ici j' ai récupéré les informations qui m' intéressent */
