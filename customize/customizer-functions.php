@@ -1,4 +1,9 @@
 <?php
+
+// j' ai créé ce fichier pour être utilisé dans un autre contexte mais, ici, je n' utilise qu' une seule de ses fonctions, donc je reverrai l' autre fichier pour pouvoir éliminer celui-ci
+
+
+
 function oetl_polices_textes($type)
 {
 	$titres =  array(

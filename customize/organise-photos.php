@@ -1,4 +1,7 @@
 <?php
+
+// ajout d' une section pour le nombre de tailles d' image et de champs ACF
+
 function oetl_photos_sizes($wp_customize)
 {
 	
@@ -12,6 +15,8 @@ function oetl_photos_sizes($wp_customize)
 	                           )
 	                         );	
 	
+	
+// 	nombre de tailles d' image
 	
 	$wp_customize->add_setting( "sizes_number_setting",
 								array(
@@ -28,6 +33,8 @@ function oetl_photos_sizes($wp_customize)
 									'type'     => 'number',
 									)
 								);	
+	
+// 	nombre de tailles de champs ACF
 	
 	
 	$wp_customize->add_setting( "acf_number_setting",
@@ -51,7 +58,7 @@ function oetl_photos_sizes($wp_customize)
 
 
 
-
+		//ajout d' une section pour décrire les tailles d' images à ajouter
 
 
 	$wp_customize->add_section( "image_sizes",
@@ -66,12 +73,18 @@ function oetl_photos_sizes($wp_customize)
 
 	for($i = 1; $i <= get_theme_mod( "sizes_number_setting", "4" ); $i++)
 	{
+		// fonction décrite par ailleurs
 		oel_size_setting($wp_customize, "image_sizes", "setting_image_sizes" .$i, "control_image_sizes". $i, "photo_size", "choisissez une taille de photo (dans sa plus grande dimension)");
 	}
 
 
 
 
+	
+	
+// 	ajout de la section qui va décrire les champs ACF
+	
+	
 	$wp_customize->add_section( "champ_acf_section",
 	                           array(
 	                               'panel' => 'photos',
@@ -111,7 +124,7 @@ function oetl_photos_sizes($wp_customize)
 add_action( 'customize_register' ,"oetl_photos_sizes" );
 
 
-// ajout des dimensions
+// ajout des dimensions via add_image_size
 
 for($i = 1; $i <= get_theme_mod( "sizes_number_setting", "4" ); $i++)
 {

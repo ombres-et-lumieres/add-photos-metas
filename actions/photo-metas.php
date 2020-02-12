@@ -130,13 +130,11 @@ function ol_modify_attachment_datas($data, $id)
 				} 
 
 
-
+// tableau à retourner
 
 	$newdata["oetl" ] =  array  (
 									"Author" => $author,
 									 "Copyright" =>$copyright,
-									// "title" => $titre,
-									// "Description" => $description,
 									 "Country" => $country,
 									 "State" => $state,
 									 "City" => $city,
@@ -182,34 +180,18 @@ if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
 // }
 
 
+// boucle pour remplir les champs ACF
 
-/*
-update_field( 'auteur',$author , $id );
-update_field( 'copyright',$copyright , $id );
-update_field( 'pays' ,$country , $id );
-update_field( 'region',$state , $id );
-update_field( 'ville',$city , $id );
-update_field( 'lieu',$location , $id );
-update_field( 'sous_emplacement',$sous_emplacement , $id );
-update_field( 'date_de_creation',$creation_date , $id );
-update_field( 'style_photographique',$photografic_style , $id );
-*/
-
-
-
-/*
-get_theme_mod( "acf_number_setting", "0" );
-
-get_theme_mod("acf_name_setting" . $i, "" );
-*/
-
-	$i = 1;
-
-	foreach($newdata["oetl" ] as $value)
-	{	
-		update_field(get_theme_mod("acf_name_setting" . $i, "" ), $value, $id);
-		
-		$i++;
+	if(is_plugin_active("advanced-custom-fields-pro/acf.php"))
+	{
+		$i = 1;
+	
+		foreach($newdata["oetl" ] as $value)
+		{	
+			update_field(get_theme_mod("acf_name_setting" . $i, "" ), $value, $id);
+			
+			$i++;
+		}
 	}
 
 

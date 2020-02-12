@@ -9,7 +9,7 @@
 function oetl_pannels_register($wp_customize)
 {
 
-/* 	panneau pour gérer les tailles des photos */
+/* 	panneau pour gérer les tailles des photos et les champs ACF */
 	$wp_customize->add_panel( 'photos', array
 									(
 									    'priority'       => 100,

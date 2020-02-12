@@ -1,4 +1,7 @@
 <?php
+// Création d' un shortcode qui va afficher les données récupérées lors du chargement de la photo et ajoutées à ses metadatas
+
+
 function metas_photo_func($atts)
 {
 	$thumb_id = get_post_thumbnail_id();

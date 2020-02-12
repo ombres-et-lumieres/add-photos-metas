@@ -49,7 +49,7 @@ include( "customize/customizer-functions.php");
 include( "customize/new-pannel.php");
 
 
-
+// Deux dossiers: un pour des actions pour récupérer différentes données des photos chargées dans la bibliothèque et la création d' un shortcode et un pour ajouter une entrée dans le customizer qui ajoutera des tailles de photo supplémentaires ainsi que des noms de champs ACF traités dans l' autre dossier
 
 
 
